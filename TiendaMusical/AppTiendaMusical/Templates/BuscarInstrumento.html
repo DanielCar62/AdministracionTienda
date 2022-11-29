@@ -1,0 +1,17 @@
+{% extends 'Inicio.html' %}
+{% load static %}
+
+{% block ListaDeContenidos %}
+
+<form action="{% url 'Buscar' %}" method="GET">{% csrf_token %}
+
+    <div style="text-align: center" class="py-4">
+
+        <p>Ingrese el modelo del instrumento <input type="number" name="modelo"/></p>
+        <input type="submit" value="Buscar" class="btn btn-outline-dark mt-auto">
+    
+    </div>
+
+</form>
+
+{% endblock ListaDeContenidos %}

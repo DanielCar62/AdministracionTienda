@@ -1,0 +1,14 @@
+{% extends 'Inicio.html' %}
+{% load static %}
+
+{% block ListaDeContenidos %}
+
+<div style="text-align: center" class="py-4">
+    
+    <p>El instrumento con el modelo: {{ modelo }}</p>
+    <h4>{{ instrumento.nombre }}
+        <div style="text-align: center"> <b>Modelo: </b> {{ instrumento.modelo }} - <b>Marca: </b> {{ instrumento.marca }}</div>
+    </h4>
+
+</div>
+{% endblock ListaDeContenidos %}

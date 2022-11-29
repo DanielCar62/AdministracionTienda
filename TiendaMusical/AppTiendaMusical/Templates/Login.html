@@ -1,0 +1,17 @@
+{% extends 'Inicio.html' %}
+{% load static %}
+
+{% block ListaDeContenidos %}
+
+<form action="{% url 'LoginView' %}" method="POST">{% csrf_token %}
+
+<div style="text-align: center" class="py-4">
+    
+    {{ formulario.as_table }}
+    <input type="submit" value="Iniciar Sesion" class="btn btn-outline-dark mt-auto"/>
+
+</div>
+
+</form>
+
+{% endblock ListaDeContenidos %}

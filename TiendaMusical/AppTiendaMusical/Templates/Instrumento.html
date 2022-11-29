@@ -1,0 +1,29 @@
+{% extends 'Inicio.html' %}
+{% load static %}
+
+{% block ListaDeContenidos %}
+
+<h1 style="text-align: center" class="py-4">Instrumentos</h1>
+
+<ul>
+    
+    {% for instrumento in instrumentos %}
+    <p style="text-align: center">
+        {{instrumento.nombre}}
+        <div style="text-align: center"> <b> Modelo:</b> {{instrumento.modelo}} - <b>Marca:</b> {{instrumento.marca}}</div>
+    </p>
+    <div>
+        <form action="{% url 'EliminarInstrumento' instrumento.id %}" method="POST">{% csrf_token %}
+            <center><button class="btn btn-outline-dark mt-auto" type="submit">Eliminar</button></center>
+        </form>
+        <center><button class="btn btn-outline-dark mt-auto">
+            <a href="{% url 'EditarInstrumento' instrumento.id %}">Editar</a>
+        </button></center>
+    </div>
+    {% endfor %}
+
+</ul>
+
+<center><a class="btn btn-outline-dark mt-auto" href="{% url 'AgregarInstrumento' %}">Instrumento nuevo</a></center>
+
+{% endblock ListaDeContenidos %}
