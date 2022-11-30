@@ -203,7 +203,7 @@ def editarPerfil(request):
             usuario.set_password(data["password1"])
             usuario.save()
             return render(request, "Inicio.html", {"mensaje": f'Los datos se han actualizado'})
-        return render(request, "EditarPerfil.html", {"mensaje": "Contraseñas no coinciden"}) 
+        return render(request, "Inicio.html", {"mensaje": "Contraseñas no coinciden"}) 
     else:
         formulario = UserEditForm(instance=request.user)
         return render(request, "EditarPerfil.html", {"formulario":formulario})

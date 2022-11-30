@@ -3,15 +3,22 @@
 
 {% block ListaDeContenidos %}
 
-<form action="{% url 'LoginView' %}" method="POST">{% csrf_token %}
+<div class="container px-lg-5">
+    <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+        <div class="m-4 m-lg-5">
 
-<div style="text-align: center" class="py-4">
-    
-    {{ formulario.as_table }}
-    <input type="submit" value="Iniciar Sesion" class="btn btn-outline-dark mt-auto"/>
+            <form action="{% url 'LoginView' %}" method="POST">{% csrf_token %}
 
+            <div style="text-align: center" class="py-4">
+                
+                {{ formulario.as_table }}
+                <input type="submit" value="Iniciar Sesion" class="btn btn-outline-dark mt-auto"/>
+
+            </div>
+
+            </form>
+        </div>
+    </div>
 </div>
-
-</form>
 
 {% endblock ListaDeContenidos %}

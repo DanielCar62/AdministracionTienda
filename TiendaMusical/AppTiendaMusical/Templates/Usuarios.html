@@ -3,24 +3,30 @@
 
 {% block ListaDeContenidos %}
 
-<h1 style="text-align: center" class="py-4">Usuarios</h1>
+<div class="container px-lg-5">
+    <div class="p-4 p-lg-5 bg-light rounded-5 text-center">
+        <div class="m-4 m-lg-5">
+            <h1 style="text-align: center" class="py-4">Usuarios</h1>
 
-    <ul>
-        {% for usuario in usuarios %}
-        <p style="text-align: center">
-            
-            {{usuario.nombre}} {{usuario.Apellido}}  
-            <div style="text-align: center"> <b> Correo electronico:</b>  {{usuario.email}}</div>
-        
-        </p>
-        <div>
-            <form action="{% url 'EliminarUsuario' usuario.id %}" method="POST">{% csrf_token %}
-                <center><button class="btn btn-outline-dark mt-auto" type="submit">Eliminar</button></center>
-            </form>
+                <ul>
+                    {% for usuario in usuarios %}
+                    <p style="text-align: center">
+                        
+                        {{usuario.nombre}} {{usuario.Apellido}}  
+                        <div style="text-align: center"> <b> Correo electronico:</b>  {{usuario.email}}</div>
+                    
+                    </p>
+                    <div>
+                        <form action="{% url 'EliminarUsuario' usuario.id %}" method="POST">{% csrf_token %}
+                            <center><button class="btn btn-outline-dark mt-auto" type="submit">Eliminar</button></center>
+                        </form>
+                    </div>
+                    {% endfor %}
+                </ul>
+            <div class="py-4">
+            <center><a class="btn btn-outline-dark mt-auto" href="{% url 'AgregarUsuario' %}">Usuario nuevo</a></center>
+            </div>
         </div>
-        {% endfor %}
-    </ul>
-
-<center><a class="btn btn-outline-dark mt-auto" href="{% url 'AgregarUsuario' %}">Usuario nuevo</a></center>
-
+    </div>
+</div>
 {% endblock ListaDeContenidos %}

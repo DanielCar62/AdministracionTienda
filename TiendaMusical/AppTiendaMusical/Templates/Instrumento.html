@@ -3,27 +3,36 @@
 
 {% block ListaDeContenidos %}
 
-<h1 style="text-align: center" class="py-4">Instrumentos</h1>
+<div class="container px-lg-5">
+    <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+        <div class="m-4 m-lg-5">
 
-<ul>
-    
-    {% for instrumento in instrumentos %}
-    <p style="text-align: center">
-        {{instrumento.nombre}}
-        <div style="text-align: center"> <b> Modelo:</b> {{instrumento.modelo}} - <b>Marca:</b> {{instrumento.marca}}</div>
-    </p>
-    <div>
-        <form action="{% url 'EliminarInstrumento' instrumento.id %}" method="POST">{% csrf_token %}
-            <center><button class="btn btn-outline-dark mt-auto" type="submit">Eliminar</button></center>
-        </form>
-        <center><button class="btn btn-outline-dark mt-auto">
-            <a href="{% url 'EditarInstrumento' instrumento.id %}">Editar</a>
-        </button></center>
+            <h1 style="text-align: center" class="py-3">Instrumentos</h1>
+
+            <ul>
+                
+                {% for instrumento in instrumentos %}
+                <p style="text-align: center">
+                    {{instrumento.nombre}}
+                    <div style="text-align: center"> <b> Modelo:</b> {{instrumento.modelo}} - <b>Marca:</b> {{instrumento.marca}}</div>
+                </p>
+                <div>
+                    <form action="{% url 'EliminarInstrumento' instrumento.id %}" method="POST">{% csrf_token %}
+                        <center><button class="btn btn-outline-dark mt-auto" type="submit">Eliminar</button></center>
+                    </form>
+                    <div class="py-2">
+                        <center><button class="btn btn-outline-dark mt-auto">
+                            <a href="{% url 'EditarInstrumento' instrumento.id %}">Editar</a>
+                        </button></center>
+                    </div>    
+                </div>
+                {% endfor %}
+
+            </ul>
+            <div class="py-4">
+                <center><a class="btn btn-outline-dark mt-auto" href="{% url 'AgregarInstrumento' %}">Instrumento nuevo</a></center>
+            </div>
+        </div>
     </div>
-    {% endfor %}
-
-</ul>
-
-<center><a class="btn btn-outline-dark mt-auto" href="{% url 'AgregarInstrumento' %}">Instrumento nuevo</a></center>
-
+</div>
 {% endblock ListaDeContenidos %}
