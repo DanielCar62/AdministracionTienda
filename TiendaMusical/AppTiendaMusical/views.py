@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 def inicio(request):
     
-    return render(request, "Inicio.html")
+    return render(request, "Inicio.html", {"mensaje": f'Inicie sesion para acceder al administrador'})
 
 @login_required
 def usuario(request):
