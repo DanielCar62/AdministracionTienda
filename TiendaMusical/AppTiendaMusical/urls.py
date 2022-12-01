@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import editarPerfil, register, loginView, editarAmplificador, editarInstrumento, eliminarAmplificador, eliminarInstrumento, eliminarUsuario, Buscar, agregarUsuario, amplificador, inicio, instrumento, usuario, agregarInstrumento, agregarAmplificador, buscar_instrumento
+from .views import editarPerfil, register, loginView, editarAmplificador, editarInstrumento, eliminarAmplificador, eliminarInstrumento, eliminarUsuario, agregarUsuario, amplificador, inicio, instrumento, usuario, agregarInstrumento, agregarAmplificador
 
 from django.contrib.auth.views import LogoutView
 
@@ -12,8 +12,6 @@ urlpatterns = [
     path('agregarusuario/', agregarUsuario, name="AgregarUsuario"),
     path('agregarinstrumento/', agregarInstrumento, name="AgregarInstrumento"),
     path('agregaramplificador/', agregarAmplificador, name="AgregarAmplificador"),
-    path('buscarinstrumento/', buscar_instrumento, name="BuscarInstrumento"),
-    path('buscar/', Buscar, name="Buscar"),
     path('eliminar-usuario/<int:id>', eliminarUsuario, name="EliminarUsuario"),
     path('eliminar-instrumento/<int:id>', eliminarInstrumento, name="EliminarInstrumento"),
     path('eliminar-amplificador/<int:id>', eliminarAmplificador, name="EliminarAmplificador"),

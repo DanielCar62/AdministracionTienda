@@ -69,16 +69,6 @@ def agregarAmplificador(request):
         formulario_amplificador = AgregarAmplificador()
     return render(request, "AgregarAmplificador.html", {"formulario_amplificador":formulario_amplificador})
 
-@login_required
-def buscar_instrumento(request):
-    return render(request, "BuscarInstrumento.html")
-
-def Buscar(request):
-    
-    modelo_buscado = request.GET["modelo"]
-    instrumento = Instrumento.objects.get(modelo = modelo_buscado)
-    return render(request, "ResultadoBusqueda.html", {"instrumento":instrumento, "modelo":modelo_buscado})
-
 def eliminarUsuario(request, id):
 
     if request.method == "POST":
@@ -207,4 +197,3 @@ def editarPerfil(request):
     else:
         formulario = UserEditForm(instance=request.user)
         return render(request, "EditarPerfil.html", {"formulario":formulario})
-
