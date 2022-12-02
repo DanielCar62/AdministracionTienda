@@ -2,12 +2,14 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
 
-class AgregarUsuario(forms.Form):
+class AgregarProveedor(forms.Form):
 
     nombre = forms.CharField()
     apellido = forms.CharField()
-    email = forms.CharField() 
-
+    email = forms.CharField()
+    empresa = forms.CharField()
+    telefono = forms.IntegerField()
+ 
 class AgregarInstrumento(forms.Form):
 
     nombre = forms.CharField()

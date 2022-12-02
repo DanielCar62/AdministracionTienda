@@ -1,0 +1,25 @@
+{% extends 'Inicio.html' %}
+{% load static %}
+
+{% block ListaDeContenidos %}
+
+<div class="container px-lg-5">
+    <div class="p-5 p-lg-7 bg-light rounded-5 text-center">
+        <div class="m-6 m-lg-8">
+            <form action="{% url 'EditarProveedor' id %}" method="POST">{% csrf_token %}
+
+            <h1 style="text-align: center" class="py-4">Editar Proveedores</h1>
+
+            <div style="text-align: center" class="py-4">
+                
+                {{ formulario_proveedor.as_table }}
+                <input type="submit" value="Actualizar" class="btn btn-outline-dark mt-auto"/>
+
+            </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock ListaDeContenidos %}

@@ -3,11 +3,13 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Usuario(models.Model):
+class Proveedor(models.Model):
 
     nombre = models.CharField(max_length=50)
     Apellido = models.CharField(max_length=50)
     email = models.EmailField()
+    empresa = models.CharField(max_length=50)
+    telefono = models.IntegerField()
 
 class Instrumento(models.Model):
 

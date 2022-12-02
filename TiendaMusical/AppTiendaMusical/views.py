@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
-from .models import Usuario, Instrumento, Amplificador
-from .forms import AgregarUsuario, AgregarInstrumento, AgregarAmplificador, UserEditForm
+from .models import Instrumento, Amplificador, Proveedor
+from .forms import AgregarProveedor, AgregarInstrumento, AgregarAmplificador, UserEditForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -12,10 +12,10 @@ def inicio(request):
     return render(request, "Inicio.html", {"mensaje": f'Inicie sesion para acceder al administrador'})
 
 @login_required
-def usuario(request):
+def proveedor(request):
 
-    lista = Usuario.objects.all()
-    return render(request, "Usuarios.html", {"usuarios": lista})
+    lista = Proveedor.objects.all()
+    return render(request, "Proveedores.html", {"proveedores": lista})
 
 @login_required
 def instrumento(request):
@@ -29,19 +29,19 @@ def amplificador(request):
     lista_amplificadores = Amplificador.objects.all()
     return render(request, "Amplificador.html", {"amplificadores":lista_amplificadores})
 
-def agregarUsuario(request):
+def agregarProveedor(request):
 
     if request.method == "POST":
-        formulario_usuario = AgregarUsuario(request.POST)
-        if formulario_usuario.is_valid():
-            data = formulario_usuario.cleaned_data
-            usuario = Usuario(nombre=data["nombre"], Apellido=data["apellido"], email=data["email"])
-            usuario.save()
-            return redirect("Usuario")
+        formulario_proveedor = AgregarProveedor(request.POST)
+        if formulario_proveedor.is_valid():
+            data = formulario_proveedor.cleaned_data
+            proveedor = Proveedor(nombre=data["nombre"], Apellido=data["apellido"], email=data["email"], empresa=data["empresa"], telefono=data["telefono"])
+            proveedor.save()
+            return redirect("Proveedor")
     else:
-        formulario_usuario = AgregarUsuario()
+        formulario_proveedor = AgregarProveedor()
 
-    return render(request, "AgregarUsuario.html", {"formulario_usuario" : formulario_usuario})
+    return render(request, "AgregarProveedor.html", {"formulario_proveedor" : formulario_proveedor})
 
 def agregarInstrumento(request):
     
@@ -69,14 +69,14 @@ def agregarAmplificador(request):
         formulario_amplificador = AgregarAmplificador()
     return render(request, "AgregarAmplificador.html", {"formulario_amplificador":formulario_amplificador})
 
-def eliminarUsuario(request, id):
+def eliminarProveedor(request, id):
 
     if request.method == "POST":
-        usuario = Usuario.objects.get(id=id)
-        usuario.delete()
+        proveedor = Proveedor.objects.get(id=id)
+        proveedor.delete()
         
-        lista = Usuario.objects.all()
-        return render(request, "Usuarios.html", {"usuarios": lista})
+        lista = Proveedor.objects.all()
+        return render(request, "Proveedores.html", {"proveedores": lista})
 
 def eliminarInstrumento(request, id):
 
@@ -95,6 +95,33 @@ def eliminarAmplificador(request, id):
 
         lista_amplificadores = Amplificador.objects.all()
         return render(request, "Amplificador.html", {"amplificadores":lista_amplificadores})
+
+def editarProveedor(request, id):
+
+    proveedor = Proveedor.objects.get(id=id)
+    if request.method == "POST":
+        formulario_proveedor = AgregarProveedor(request.POST)
+        if formulario_proveedor.is_valid():
+            data = formulario_proveedor.cleaned_data
+            proveedor.nombre = data["nombre"]
+            proveedor.Apellido = data["apellido"]
+            proveedor.email = data["email"]
+            proveedor.empresa = data["empresa"]
+            proveedor.telefono = data["telefono"]
+            proveedor.save()
+
+            lista_proveedores = Proveedor.objects.all()
+            return render(request, "Proveedores.html", {"proveedores": lista_proveedores})
+    
+    else:
+        formulario_proveedor = AgregarProveedor(initial= {
+            "nombre": proveedor.nombre,
+            "apellido": proveedor.Apellido,
+            "email": proveedor.email,
+            "empresa": proveedor.empresa,
+            "telefono": proveedor.telefono,
+        })
+        return render(request, "EditarProveedor.html", {"formulario_proveedor": formulario_proveedor, "id": proveedor.id})
 
 def editarInstrumento(request, id):
 
