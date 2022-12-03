@@ -1,11 +1,12 @@
 from django.urls import path
 
-from .views import editarProveedor, editarPerfil, register, loginView, editarAmplificador, editarInstrumento, eliminarAmplificador, eliminarInstrumento, eliminarProveedor, agregarProveedor, amplificador, inicio, instrumento, proveedor, agregarInstrumento, agregarAmplificador
+from .views import about, editarProveedor, editarPerfil, register, loginView, editarAmplificador, editarInstrumento, eliminarAmplificador, eliminarInstrumento, eliminarProveedor, agregarProveedor, amplificador, inicio, instrumento, proveedor, agregarInstrumento, agregarAmplificador
 
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('inicio/', inicio, name="Inicio"),
+    path('about/', about, name="About"),
     path('proveedor/', proveedor, name="Proveedor"),
     path('instrumento/', instrumento, name="Instrumento"),
     path('amplificador/', amplificador, name="Amplificador"),

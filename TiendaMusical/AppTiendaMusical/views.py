@@ -11,6 +11,10 @@ def inicio(request):
     
     return render(request, "Inicio.html", {"mensaje": f'Inicie sesion para acceder al administrador'})
 
+def about(request):
+    
+    return render(request, "About.html")
+
 @login_required
 def proveedor(request):
 
