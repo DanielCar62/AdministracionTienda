@@ -28,7 +28,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             {% if user.is_authenticated %}
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse px-4" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="navbar-brand" href="{% url 'Proveedor' %}">Proveedores</a>
@@ -41,7 +41,7 @@
                     </li>
                 </ul>
             </div>
-            <ul class="navbar-nav">
+            <ul class="navbar-nav px-4">
                 <li class="nav-item">
                     <a class="navbar-brand btn btn-outline-warning py-8" aria-current="page" href="{% url 'Logout' %}">Cerrar Sesion</a>
                 </li>
@@ -103,10 +103,10 @@
                     <!-- Footer Social Icons-->
                     <div class="col-lg-4 mb-5 mb-lg-0 py-4">
                         <h4 class="text-uppercase mb-4"> Acerca de la WEB</h4>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+                        <a href="https://www.facebook.com">Facebook</a>
+                        <a href="https://github.com">Github</a>
+                        <a href="https://twitter.com">Twitter</a>
+                        <a href="https://mx.linkedin.com">Linkedin</a>
                     </div>
                     <!-- Footer About Text-->
                     <div class="col-lg-4 py-4">
