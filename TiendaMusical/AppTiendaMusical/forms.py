@@ -23,6 +23,19 @@ class AgregarAmplificador(forms.Form):
 
 class UserEditForm(UserChangeForm):
 
+    class Meta:
+        model = User
+        fields = ["email", "first_name", "last_name"]
+    
+class Contactar(forms.Form):
+
+	nombre = forms.CharField(max_length = 50)
+	apellido = forms.CharField(max_length = 50)
+	email = forms.EmailField(max_length = 150)
+	mensaje = forms.CharField(widget = forms.Textarea, max_length = 2000)
+
+class CambiarContrasenia(UserChangeForm):
+
     password = forms.CharField(
         help_text="",
         widget=forms.HiddenInput(), required=False
@@ -33,7 +46,7 @@ class UserEditForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ["email", "first_name", "last_name", "password1", "password2"]
+        fields = ["password1", "password2"]
     
     def clean_password2(self):
 
@@ -41,5 +54,4 @@ class UserEditForm(UserChangeForm):
         if password2 != self.cleaned_data["password1"]:
             raise forms.ValidationError("Las contraseñas son diferentes")
         return password2
-
 

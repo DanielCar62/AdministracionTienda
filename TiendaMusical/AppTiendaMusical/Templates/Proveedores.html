@@ -3,11 +3,15 @@
 
 {% block ListaDeContenidos %}
 
-<h1 style="text-align: center" class="py-4">Proveedores</h1>
+<h1 style="text-align: center" class="py-3">Todos los Proveedores</h1>
+
+<div class="py-2">
+    <center><button class="btn btn-dark mt-auto px-4"><a href="{% url 'BuscarProveedor' %}"class="text-light px-4">Buscar Proveedor</a></button></center>
+</div>
 
 {% for proveedor in proveedores %}
 <center>
-    <div class="col-lg-6 col-xxl-4 mb-5">
+    <div class="col-lg-6 col-xxl-4 mb-5 py-4">
         <div class="card bg-light border-0 h-100">
             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"></div>
@@ -15,7 +19,7 @@
                 <p class="mb-0"><b> Correo electronico:</b> {{proveedor.email}}</p>
                 <p class="mb-0"><b> Empresa:</b> {{proveedor.empresa}}</p>
                 <p class="mb-0"><b> Telefono:</b> {{proveedor.telefono}}</p>
-
+                
                 <div>
                     <div class="py-2">
                         <center><button class="btn btn-dark mt-auto">
@@ -23,21 +27,18 @@
                                     class="text-light">Editar</a></button>
                         </center>
                     </div>
-                    <form action="{% url 'EliminarProveedor' proveedor.id %}" method="POST">{% csrf_token %}
-                        <div class="py-4">
-                            <center><button class="btn btn-outline-dark mt-auto" type="submit">Eliminar</button>
-                            </center>
-                        </div>
-                    </form>
                 </div>
+               
+                <form action="{% url 'EliminarProveedor' proveedor.id %}" method="POST">{% csrf_token %}
+                    <div class="py-4">
+                        <center><button class="btn btn-outline-dark mt-auto" type="submit">Eliminar</button></center>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
 </center>
 {% endfor %}
-
-<div class="py-4">
-    <center><a class="btn btn-outline-dark mt-auto" href="{% url 'AgregarProveedor' %}">Proveedor Nuevo</a></center>
-</div>
 
 {% endblock ListaDeContenidos %}

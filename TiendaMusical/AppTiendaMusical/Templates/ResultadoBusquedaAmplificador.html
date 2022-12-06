@@ -1,0 +1,21 @@
+{% extends 'Inicio.html' %}
+{% load static %}
+
+{% block ListaDeContenidos %}
+
+<div class="container px-lg-5">
+    <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+        <div class="m-4 m-lg-5">
+
+            <div style="text-align: center" class="py-4">
+                
+                <p>El instrumento con el modelo: {{ modelo }}</p>
+                    <div style="text-align: center"> <b>Modelo: </b> {{ amplificador.modelo }} - <b>Marca: </b> {{ amplificador.marca }}</div>
+                </h4>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock ListaDeContenidos %}

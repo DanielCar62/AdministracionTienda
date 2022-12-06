@@ -1,10 +1,11 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from .models import Instrumento, Amplificador, Proveedor
-from .forms import AgregarProveedor, AgregarInstrumento, AgregarAmplificador, UserEditForm
+from .forms import AgregarProveedor, AgregarInstrumento, AgregarAmplificador, UserEditForm, Contactar, CambiarContrasenia
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail, BadHeaderError
 # Create your views here.
 
 def inicio(request):
@@ -14,6 +15,21 @@ def inicio(request):
 def about(request):
     
     return render(request, "About.html")
+
+@login_required
+def inicioProveedor(request):
+    
+    return render(request, "InicioProveedor.html")
+
+@login_required
+def inicioInstrumento(request):
+    
+    return render(request, "InicioInstrumento.html")
+
+@login_required
+def inicioAmplificador(request):
+    
+    return render(request, "InicioAmplificador.html")
 
 @login_required
 def proveedor(request):
@@ -33,6 +49,7 @@ def amplificador(request):
     lista_amplificadores = Amplificador.objects.all()
     return render(request, "Amplificador.html", {"amplificadores":lista_amplificadores})
 
+@login_required
 def agregarProveedor(request):
 
     if request.method == "POST":
@@ -47,6 +64,7 @@ def agregarProveedor(request):
 
     return render(request, "AgregarProveedor.html", {"formulario_proveedor" : formulario_proveedor})
 
+@login_required
 def agregarInstrumento(request):
     
     if request.method == "POST":
@@ -60,6 +78,7 @@ def agregarInstrumento(request):
         formulario_instrumento = AgregarInstrumento()
     return render(request, "AgregarInstrumento.html", {"formulario_instrumento": formulario_instrumento})
 
+@login_required
 def agregarAmplificador(request):
 
     if request.method == "POST":
@@ -73,6 +92,7 @@ def agregarAmplificador(request):
         formulario_amplificador = AgregarAmplificador()
     return render(request, "AgregarAmplificador.html", {"formulario_amplificador":formulario_amplificador})
 
+@login_required
 def eliminarProveedor(request, id):
 
     if request.method == "POST":
@@ -82,6 +102,7 @@ def eliminarProveedor(request, id):
         lista = Proveedor.objects.all()
         return render(request, "Proveedores.html", {"proveedores": lista})
 
+@login_required
 def eliminarInstrumento(request, id):
 
     if request.method =="POST":
@@ -91,6 +112,7 @@ def eliminarInstrumento(request, id):
         lista_instrumentos = Instrumento.objects.all()
         return render(request, "Instrumento.html", {"instrumentos": lista_instrumentos})
 
+@login_required
 def eliminarAmplificador(request, id):
 
     if request.method == "POST":
@@ -100,6 +122,7 @@ def eliminarAmplificador(request, id):
         lista_amplificadores = Amplificador.objects.all()
         return render(request, "Amplificador.html", {"amplificadores":lista_amplificadores})
 
+@login_required
 def editarProveedor(request, id):
 
     proveedor = Proveedor.objects.get(id=id)
@@ -127,6 +150,7 @@ def editarProveedor(request, id):
         })
         return render(request, "EditarProveedor.html", {"formulario_proveedor": formulario_proveedor, "id": proveedor.id})
 
+@login_required
 def editarInstrumento(request, id):
 
     instrumento = Instrumento.objects.get(id=id)
@@ -150,6 +174,7 @@ def editarInstrumento(request, id):
         })
         return render(request, "EditarInstrumento.html", {"formulario_instrumento": formulario_instrumento, "id": instrumento.id})
 
+@login_required
 def editarAmplificador(request, id):
 
     amplificador = Amplificador.objects.get(id=id)
@@ -195,6 +220,7 @@ def loginView(request):
         formulario = AuthenticationForm()
         return render(request, "Login.html", {"formulario": formulario})
 
+@login_required
 def register(request):
     
     if request.method == "POST":
@@ -211,6 +237,7 @@ def register(request):
         formulario = UserCreationForm()
         return render(request, "Registro.html", {"formulario":formulario})
 
+@login_required
 def editarPerfil(request):
     usuario = request.user
     if request.method == "POST":
@@ -221,10 +248,89 @@ def editarPerfil(request):
             usuario.first_name = data["first_name"]
             usuario.last_name = data["last_name"]
             usuario.email = data["email"]
-            usuario.set_password(data["password1"])
             usuario.save()
-            return render(request, "Inicio.html", {"mensaje": f'Los datos se han actualizado'})
-        return render(request, "Inicio.html", {"mensaje": "Contraseñas no coinciden"}) 
+            return render(request, "Inicio.html", {"mensaje": f'Los datos se han actualizado'}) 
     else:
         formulario = UserEditForm(instance=request.user)
         return render(request, "EditarPerfil.html", {"formulario":formulario})
+
+@login_required
+def buscar_instrumento(request):
+    return render(request, "BuscarInstrumento.html")
+
+@login_required
+def ResultadoBusquedaInstrumento(request):
+    
+    modelo_buscado = request.GET["modelo"]
+    if Instrumento.objects.filter(modelo=modelo_buscado).exists():
+        instrumento = Instrumento.objects.get(modelo = modelo_buscado)
+        return render(request, "ResultadoBusquedaInstrumento.html", {"instrumento":instrumento, "modelo":modelo_buscado})
+    else:
+        return render(request, "Inicio.html", {"mensaje": "No hay coincidencias"})
+
+@login_required
+def buscar_proveedor(request):
+    return render(request, "BuscarProveedor.html")
+
+@login_required
+def ResultadoBusquedaProveedor(request):
+    
+    nombre_buscado = request.GET["nombre"]
+    if Proveedor.objects.filter(nombre=nombre_buscado).exists():
+        proveedor = Proveedor.objects.get(nombre = nombre_buscado)
+        return render(request, "ResultadoBusquedaProveedor.html", {"proveedor":proveedor, "nombre":nombre_buscado})
+    else:
+        return render(request, "Inicio.html", {"mensaje": "No hay coincidencias"})
+
+@login_required
+def buscar_amplificador(request):
+    return render(request, "BuscarAmplificador.html")
+
+@login_required
+def ResultadoBusquedaAmplificador(request):
+    
+    modelo_buscado = request.GET["modelo"]
+    if Amplificador.objects.filter(modelo=modelo_buscado).exists():
+        amplificador = Amplificador.objects.get(modelo = modelo_buscado)
+        return render(request, "ResultadoBusquedaAmplificador.html", {"amplificador":amplificador, "modelo":modelo_buscado})
+    else:
+        return render(request, "Inicio.html", {"mensaje": "No hay coincidencias"})
+
+@login_required
+def contacto(request):
+	if request.method == 'POST':
+		formulario = Contactar(request.POST)
+		if formulario.is_valid():
+			titulo = "Consulta del sitio web" 
+			cuerpo = {
+			'nombre': formulario.cleaned_data['nombre'], 
+			'apellido': formulario.cleaned_data['apellido'], 
+			'email': formulario.cleaned_data['email'], 
+			'mensaje':formulario.cleaned_data['mensaje'], 
+			}
+			mensaje = "\n".join(cuerpo.values())
+
+			try:
+				send_mail(titulo, mensaje, 'admin@gmail.com', ['admin@gmail.com']) 
+			except BadHeaderError:
+				return HttpResponse('Invalid header found.')
+			return redirect ("Contacto")
+      
+	formulario = Contactar()
+	return render(request, "Contacto.html", {'formulario':formulario})
+
+@login_required
+def cambiar_contrasenia(request):
+    usuario = request.user
+    if request.method == "POST":
+        formulario = CambiarContrasenia(request.POST)
+        
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+            usuario.set_password(data["password1"])
+            usuario.save()
+            return render(request, "Logout.html", {"mensaje": f'Los datos se han actualizado'})
+        return render(request, "Inicio.html", {"mensaje": "Contraseñas no coinciden"}) 
+    else:
+        formulario = CambiarContrasenia(instance=request.user)
+        return render(request, "CambiarContrasenia.html", {"formulario":formulario})

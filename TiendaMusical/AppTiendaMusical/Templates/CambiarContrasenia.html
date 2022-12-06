@@ -1,0 +1,28 @@
+{% extends 'Inicio.html' %}
+{% load static %}
+
+{% block ListaDeContenidos %}
+
+<div class="container px-lg-5">
+    <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+        <div class="m-4 m-lg-5">
+
+            <form method="POST">{% csrf_token %}
+
+            <h1 style="text-align: center" class="py-3">Cambiar Contraseña</h1>
+
+            <div style="text-align: center">
+                
+                {{ formulario.as_p }}
+                
+                <div class="py-4">
+                    <input type="submit" value="Actualizar" class="btn btn-outline-dark mt-auto"/>
+                </div>   
+            </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock ListaDeContenidos %}

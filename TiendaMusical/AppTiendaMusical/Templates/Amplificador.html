@@ -5,9 +5,13 @@
 
 <h1 style="text-align: center" class="py-3">Amplificadores</h1>
 
+<div class="py-2">
+    <center><button class="btn btn-dark mt-auto px-4"><a href="{% url 'BuscarAmplificador' %}"class="text-light px-4">Buscar Amplificador</a></button></center>
+</div>
+
 {% for amplificador in amplificadores %}
 <center>
-    <div class="col-lg-6 col-xxl-4 mb-5">
+    <div class="col-lg-6 col-xxl-4 mb-5 py-4">
         <div class="card bg-light border-0 h-100">
             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i></i></div>
@@ -28,10 +32,5 @@
     </div>
 </center>
 {% endfor %}
-
-<div class="py-4">
-    <center><a class="btn btn-outline-dark mt-auto" href="{% url 'AgregarAmplificador' %}">Amplificador nuevo</a>
-    </center>
-</div>
 
 {% endblock ListaDeContenidos %}

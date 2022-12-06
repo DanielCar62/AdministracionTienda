@@ -31,13 +31,16 @@
             <div class="collapse navbar-collapse px-4" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="navbar-brand" href="{% url 'Proveedor' %}">Proveedores</a>
+                        <a class="navbar-brand" href="{% url 'InicioProveedor' %}">Proveedores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="navbar-brand" href="{% url 'Instrumento' %}">Instrumentos</a>
+                        <a class="navbar-brand" href="{% url 'InicioInstrumento' %}">Instrumentos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="navbar-brand" href="{% url 'Amplificador' %}">Amplificadores</a>
+                        <a class="navbar-brand" href="{% url 'InicioAmplificador' %}">Amplificadores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{% url 'Contacto' %}">Contactanos</a>
                     </li>
                 </ul>
             </div>
@@ -50,6 +53,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="navbar-brand" href="{% url 'EditarPerfil' %}">Editar Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand" href="{% url 'CambiarContrasenia' %}">Cambiar Contraseña</a>
                 </li>
             </ul>
             {% else %}

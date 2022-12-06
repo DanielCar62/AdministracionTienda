@@ -5,9 +5,13 @@
 
 <h1 style="text-align: center" class="py-3">Instrumentos</h1>
 
+<div class="py-2">
+    <center><button class="btn btn-dark mt-auto px-4"><a href="{% url 'BuscarInstrumento' %}"class="text-light px-4">Buscar Instrumento</a></button></center>
+</div>
+
 {% for instrumento in instrumentos %}
 <center>
-    <div class="col-lg-6 col-xxl-4 mb-5">
+    <div class="col-lg-6 col-xxl-4 mb-5 py-4">
         <div class="card bg-light border-0 h-100">
             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                 <div class="feature bg-primary bg-dark text-white rounded-3 mb-4 mt-n4"><i></i></div>
@@ -34,9 +38,5 @@
     </div>
 </center>
 {% endfor %}
-
-<div class="py-4">
-    <center><a class="btn btn-outline-dark mt-auto" href="{% url 'AgregarInstrumento' %}">Instrumento nuevo</a></center>
-</div>
 
 {% endblock ListaDeContenidos %}

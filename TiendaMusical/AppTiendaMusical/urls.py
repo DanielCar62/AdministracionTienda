@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import about, editarProveedor, editarPerfil, register, loginView, editarAmplificador, editarInstrumento, eliminarAmplificador, eliminarInstrumento, eliminarProveedor, agregarProveedor, amplificador, inicio, instrumento, proveedor, agregarInstrumento, agregarAmplificador
+from .views import cambiar_contrasenia, contacto, ResultadoBusquedaAmplificador, buscar_amplificador, ResultadoBusquedaProveedor, buscar_proveedor, inicioAmplificador, inicioInstrumento, inicioProveedor, ResultadoBusquedaInstrumento, buscar_instrumento, about, editarProveedor, editarPerfil, register, loginView, editarAmplificador, editarInstrumento, eliminarAmplificador, eliminarInstrumento, eliminarProveedor, agregarProveedor, amplificador, inicio, instrumento, proveedor, agregarInstrumento, agregarAmplificador
 
 from django.contrib.auth.views import LogoutView
 
@@ -23,4 +23,15 @@ urlpatterns = [
     path('registro/', register, name="Registro"),
     path('logout/', LogoutView.as_view(template_name="Logout.html"), name="Logout"),
     path('editar-perfil/', editarPerfil, name="EditarPerfil"),
+    path('resultado-busqueda-instrumento/', ResultadoBusquedaInstrumento, name="ResultadoBusquedaInstrumento"),
+    path('buscarinstrumento/', buscar_instrumento, name="BuscarInstrumento"),
+    path('inicio-proveedor/', inicioProveedor, name="InicioProveedor"),
+    path('inicio-instrumento/', inicioInstrumento, name="InicioInstrumento"),
+    path('inicio-amplificador/', inicioAmplificador, name="InicioAmplificador"),
+    path('resultado-busqueda-proveedor/', ResultadoBusquedaProveedor, name="ResultadoBusquedaProveedor"),
+    path('buscar-proveedor/', buscar_proveedor, name="BuscarProveedor"),
+    path('resultado-busqueda-amplificador/', ResultadoBusquedaAmplificador, name="ResultadoBusquedaAmplificador"),
+    path('buscar-amplificador/', buscar_amplificador, name="BuscarAmplificador"),
+    path('contacto/', contacto, name="Contacto"),
+    path('cambiar-contrasenia/', cambiar_contrasenia, name="CambiarContrasenia"),
 ]

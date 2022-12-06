@@ -1,0 +1,22 @@
+{% extends 'Inicio.html' %}
+{% load static %}
+
+{% block ListaDeContenidos %}
+
+<div class="container px-lg-5">
+    <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+        <div class="m-4 m-lg-5">
+
+            <div style="text-align: center" class="py-4">
+                
+                <p>El proveedor con el nombre: {{ nombre }}</p>
+                <h4>{{ proveedor.nombre }} {{proveedor.Apellido}}
+                    <div style="text-align: center"> <b>Correo: </b> {{ proveedor.email }} - <b>Empresa: </b> {{ proveedor.empresa }} - <b>Telefono: </b> {{ proveedor.telefono }}</div>
+                </h4>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock ListaDeContenidos %}
